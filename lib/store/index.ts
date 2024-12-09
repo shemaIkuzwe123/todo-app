@@ -25,6 +25,8 @@ export const useTodoStore = create<State & Actions>()(
         })),
     }),
 
-    { name: "todos" }
+    { name: "todos", 
+     //skipHydration:true
+    }
   )
 );

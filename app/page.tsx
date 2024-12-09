@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useTodoStore } from "@/lib/store";
 
+
 export default function TodoApp() {
   const {
     todo: todos,
@@ -20,7 +21,9 @@ export default function TodoApp() {
     }
   };
   
-  
+  // useEffect(()=>{
+  //   useTodoStore.persist.rehydrate()
+  // })
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-100 to-indigo-200 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-md">
