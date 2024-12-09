@@ -13,3 +13,11 @@ export type Actions = {
 export type State={
     todo:Todo[]
 }
+
+export type FormState={
+  errors?:{
+    email?:string[],
+    password?:string[]
+  },
+  message?:string
+}

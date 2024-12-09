@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useTodoStore } from "@/lib/store";
+import Link from "next/link";
 
 
 export default function TodoApp() {
@@ -20,16 +21,19 @@ export default function TodoApp() {
       newTodo(text.trim());
     }
   };
-  
   // useEffect(()=>{
   //   useTodoStore.persist.rehydrate()
   // })
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-100 to-indigo-200 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-md">
-        <h1 className="text-3xl font-bold text-center mb-6 text-indigo-600">
+      <div className="flex justify-between">
+      <h1 className="text-3xl font-bold text-center mb-6 text-indigo-600">
           My Todo List
         </h1>
+        <Button asChild variant={"link"}>
+           <Link href={"/auth/login"}>Login</Link>
+        </Button>
+      </div>
         <form action={addTodo} className="flex mb-4">
           <Input
             type="text"
@@ -81,6 +85,5 @@ export default function TodoApp() {
           </p>
         )}
       </div>
-    </div>
   );
 }
