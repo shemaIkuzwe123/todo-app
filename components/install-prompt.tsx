@@ -22,10 +22,10 @@ export default function InstallPrompt() {
             {" "}
             ⎋{" "}
           </span>
-          and then "Add to Home Screen"
+          and then &quot;Add to Home Screen&quot;
           <span role="img" aria-label="plus icon">
-            {" "}
-            ➕{" "}
+            
+            ➕
           </span>
           .
         </p>
