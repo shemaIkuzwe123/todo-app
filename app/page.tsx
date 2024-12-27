@@ -1,3 +1,4 @@
+import InstallPrompt from "@/components/install-prompt";
 import Todo from "@/components/Todo";
 import { Button } from "@/components/ui/button";
 import { Metadata } from "next";
@@ -23,6 +24,7 @@ export default function TodoApp() {
         </Button>
       </div>
       <Todo />
+      <InstallPrompt/>
     </div>
   );
 }

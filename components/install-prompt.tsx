@@ -16,7 +16,7 @@ export default function InstallPrompt() {
       <h3>Install App</h3>
       <button>Add to Home Screen</button>
       {isIOS && (
-        <p>
+        <p >
           To install this app on your iOS device, tap the share button
           <span role="img" aria-label="share icon">
             {" "}
