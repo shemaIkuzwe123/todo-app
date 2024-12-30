@@ -1,7 +1,7 @@
 'use server'
-import webpush from "web-push"
+import  webpush from  "web-push"
 webpush.setVapidDetails(
-  '<mailto:eshemaikuzwe@gmail.com>',
+  process.env.NEXT_PUBLIC_BASE_URL!,
   process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!,
   process.env.VAPID_PRIVATE_KEY!
 )
