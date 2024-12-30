@@ -5,6 +5,11 @@ import {
   unsubscribeUser,
   sendNotification,
 } from "@/lib/notification";
+import {BellRing} from "lucide-react";
+import {Label} from "@/components/ui/label";
+import {Switch} from "@/components/ui/switch";
+import {Input} from "@/components/ui/input";
+import {Button} from "@/components/ui/button";
 
 function urlBase64ToUint8Array(base64String: string) {
   const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
@@ -71,29 +76,46 @@ export function PushNotificationManager() {
   if (!isSupported) {
     return <p>Push notifications are not supported in this browser.</p>;
   }
-
+  const handleSubscriptionToggle = () => {
+     unsubscribeFromPush()
+  }
   return (
-    <div>
-      <h3>Push Notifications</h3>
-      {subscription ? (
-        <>
-          <p>You are subscribed to push notifications.</p>
-          <button onClick={unsubscribeFromPush}>Unsubscribe</button>
-          <input
-            type="text"
-            placeholder="Enter notification message"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-          />
-          <button onClick={sendTestNotification}>Send Test</button>
-        </>
-      ) : (
-        <>
-          <p>You are not subscribed to push notifications.</p>
-          <button onClick={subscribeToPush}>Subscribe</button>
-        </>
-      )}
-    </div>
+      <div className={"bg-white p-2 rounded-md"}>
+        <div className="space-y-2">
+          <div className="flex items-center justify-between space-x-2">
+            <div className="flex items-center space-x-2">
+              <BellRing className="h-4 w-4"/>
+              <Label htmlFor="push-notifications">Push Notifications</Label>
+            </div>
+            <Switch
+                id="push-notifications"
+                checked={!!subscription}
+                onCheckedChange={handleSubscriptionToggle}
+            />
+          </div>
+
+          <p className="text-sm text-muted-foreground">
+            {subscription
+                ? "You are subscribed to push notifications."
+                : "Push notifications are disabled."}
+          </p>
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="notification-message">Notification Message</Label>
+          <div className="flex space-x-2">
+            <Input
+                id="notification-message"
+                placeholder="Enter notification message"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+            />
+            <Button onClick={sendTestNotification}>
+              Send Test
+            </Button>
+          </div>
+        </div>
+      </div>
   );
 }
 
