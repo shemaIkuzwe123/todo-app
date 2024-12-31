@@ -1,7 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import { PushNotificationManager } from "./send";
-import  {Card,CardTitle,CardHeader,CardContent} from  "@/components/ui/card"
 import { Button } from "./ui/button";
 import { Download, HomeIcon} from "lucide-react";
 export default function InstallPrompt() {

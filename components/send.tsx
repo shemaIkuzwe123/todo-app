@@ -10,6 +10,7 @@ import {Label} from "@/components/ui/label";
 import {Switch} from "@/components/ui/switch";
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
+import {log} from "node:util";
 
 function urlBase64ToUint8Array(base64String: string) {
   const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
@@ -29,8 +30,7 @@ export function PushNotificationManager() {
   const [subscription, setSubscription] = useState<PushSubscription | null>(
     null
   );
-  const [message, setMessage] = useState("");
-
+  console.log(subscription)
   useEffect(() => {
     if ("serviceWorker" in navigator && "PushManager" in window) {
       setIsSupported(true);
@@ -65,19 +65,12 @@ export function PushNotificationManager() {
     setSubscription(null);
     await unsubscribeUser();
   }
-
-  async function sendTestNotification() {
-    if (subscription) {
-      await sendNotification(message);
-      setMessage("");
-    }
-  }
-
   if (!isSupported) {
     return <p>Push notifications are not supported in this browser.</p>;
   }
-  const handleSubscriptionToggle = () => {
-     unsubscribeFromPush()
+  const handleSubscriptionToggle =async () => {
+    if (subscription) return unsubscribeFromPush();
+    return  subscribeToPush();
   }
   return (
       <div className={"bg-white p-2 rounded-md"}>
@@ -89,7 +82,7 @@ export function PushNotificationManager() {
             </div>
             <Switch
                 id="push-notifications"
-                checked={!!subscription}
+                 checked={!!subscription}
                 onCheckedChange={handleSubscriptionToggle}
             />
           </div>
@@ -103,17 +96,16 @@ export function PushNotificationManager() {
 
         <div className="space-y-2">
           <Label htmlFor="notification-message">Notification Message</Label>
-          <div className="flex space-x-2">
+          <form className="flex space-x-2" action={sendNotification}>
             <Input
                 id="notification-message"
                 placeholder="Enter notification message"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
+                 name={"message"}
             />
-            <Button onClick={sendTestNotification}>
+            <Button>
               Send Test
             </Button>
-          </div>
+          </form>
         </div>
       </div>
   );

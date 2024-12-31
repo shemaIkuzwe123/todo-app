@@ -2,11 +2,8 @@ import InstallPrompt from "@/components/install-prompt";
 import Todo from "@/components/Todo";
 import { Button } from "@/components/ui/button";
 import { Metadata } from "next";
-import Link from "next/link";
 import {PushNotificationManager} from "@/components/send";
 import { LogIn } from "lucide-react";
-import {Card, CardContent} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import {Separator} from "@/components/ui/separator";
 
 export const metadata: Metadata = {
@@ -52,4 +49,4 @@ export default function TodoApp() {
               </div>
           </div>
       </div>
-  )
+  )}

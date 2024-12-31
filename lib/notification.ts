@@ -22,24 +22,17 @@ export async function unsubscribeUser() {
   return { success: true }
 }
  
-export async function sendNotification(message: string) {
+export async function sendNotification(formData:FormData) {
+  const message = formData.get("message") as string
   if (!subscription) {
     throw new Error('No subscription available')
   }
- 
-  try {
-    await webpush.sendNotification(
-
+  await webpush.sendNotification(
       subscription,
       JSON.stringify({
         title: 'Test Notification',
         body: message,
-        icon: '/icon.png',
+        icon: '/icons/icon1.png',
       })
     )
-    return { success: true }
-  } catch (error) {
-    console.error('Error sending push notification:', error)
-    return { success: false, error: 'Failed to send notification' }
-  }
 }
