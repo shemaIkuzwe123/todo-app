@@ -15,7 +15,7 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "Todo App",
-  description: "Next Todo App",
+  description: "Pwa Todo App",
   icons:{
     icon:"/icons/icon1.png"
   }

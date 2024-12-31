@@ -28,6 +28,7 @@ export async function sendNotification(formData:FormData) {
     throw new Error('No subscription available')
   }
   await webpush.sendNotification(
+
       subscription,
       JSON.stringify({
         title: 'Test Notification',
