@@ -1,55 +1,14 @@
-"use client";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { authenticate } from "@/lib/action";
-import { LoginShema } from "@/lib/shema";
-import { useForm } from "@conform-to/react";
-import { parseWithZod } from "@conform-to/zod";
-import React, { useActionState } from "react";
+import LoginButton from "@/components/LoginButton"
 
-export default function Page() {
-  const [state, action, isPending] = useActionState(authenticate, undefined);
-  const [form, fields] = useForm({
-    onValidate({ formData }) {
-      return parseWithZod(formData, { schema: LoginShema });
-    },
-    shouldValidate: "onBlur",
-    shouldRevalidate: "onInput",
-  });
+export default function Home() {
   return (
-    <div className=" h-screen w-full flex justify-center items-center">
-      <form
-        className=" flex flex-col gap-4 w-96  rounded-md bg-white p-8"
-        id={form.id}
-        onSubmit={form.onSubmit}
-        action={action}
-        noValidate
-      >
-        <h3 className="text-xl font-bold">
-          Enter your credentials to continue
-        </h3>
-        <Input
-          key={fields.email.key}
-          name={fields.email.name}
-          placeholder="Enter your Email"
-        />
-        <span className="my-2 text-sm text-destructive">
-          {fields.email.errors}
-        </span>
-        <Input
-          type="password"
-          key={fields.password.key}
-          name={fields.password.name}
-          placeholder="Enter your Password"
-        />
-        <span className="my-2 text-sm text-destructive">
-          {fields.password.errors}
-        </span>
-        <Button type="submit" disabled={isPending}>
-          {isPending ? "Logging in.." : "Login "}
-        </Button>
-        {/* {state?.status === "error" && <p className='text-red-500'>{state?.message}</p>} */}
-      </form>
-    </div>
-  );
+    <main className="flex min-h-screen flex-col items-center justify-center bg-gray-100">
+      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
+        <h1 className="text-3xl font-bold text-center text-gray-900">Welcome</h1>
+        <p className="text-center text-gray-600">Sign in to your account</p>
+        <LoginButton />
+      </div>
+    </main>
+  )
 }
+
